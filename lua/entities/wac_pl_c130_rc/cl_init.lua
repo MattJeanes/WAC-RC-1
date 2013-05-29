@@ -5,6 +5,7 @@ ENT.thirdPerson = {
 	distance = 1200
 }
 
+/*
 local HudMat = Material("WeltEnSTurm/helihud/arrow")
 local HudCol = Color(70,199,50,150)
 local Black = Color(0,0,0,200)
@@ -18,7 +19,7 @@ function ENT:DrawPilotHud()
 
 	local uptm = self.rotorRpm
 	local upm = self.SmoothUp
-	cam.Start3D2D(self:LocalToWorld((Vector(20,3.75,37.75)*self.Scale)+self.Seats[1].pos), ang,0.015*self.Scale)
+	cam.Start3D2D(self:LocalToWorld((Vector(20,3.75,37.75)+(self.Offsets.hud or Vector()))+self.Seats[1].pos), ang,0.015*self.Scale)
 	surface.SetDrawColor(HudCol)
 	surface.DrawRect(235, 249, 10, 2)
 	surface.DrawRect(255, 249, 10, 2)
@@ -75,7 +76,7 @@ function ENT:DrawWeaponSelection()
 	ang:RotateAroundAxis(fwd, 90)
 	for k,t in pairs(self.Seats) do
 		if k != "BaseClass" and !t.NoHud then
-			cam.Start3D2D(self:LocalToWorld((Vector(20,5,25)*self.Scale)+t.pos), ang, 0.02*self.Scale)
+			cam.Start3D2D(self:LocalToWorld((Vector(20,5,25)+(self.Offsets.wepselect or Vector()))+t.pos), ang, 0.02*self.Scale)
 			surface.DrawRect(-10, 0, 500, 30)
 			surface.DrawRect(-10, 30, 10, 20)
 			if t.weapons then
@@ -96,23 +97,23 @@ function ENT:DrawWeaponSelection()
 		end
 	end
 end
+*/
 
 function ENT:viewCalcFirstPerson(k, p, view)
 	p.wac = p.wac or {}
-	local vec=Vector(2.5,0,26)
 	if
 		k == 1
 		and p:GetInfo("wac_cl_air_mouse") == "1"
 		and !p.wac.viewFree
 	then
 		self.viewTarget = {
-			origin = -vec,
+			origin = self:WorldToLocal(self:LocalToWorld(self.Offsets.view)) or Vector(0,0,0),
 			angles = Angle(0,0,0),
 			fov = view.fov
 		}
 	else
 		self.viewTarget = {
-			origin = -vec,
+			origin = self:WorldToLocal(self:LocalToWorld(self.Offsets.view)) or Vector(0,0,0),
 			angles = p:GetAimVector():Angle() - self:GetAngles(),
 			fov = view.fov
 		}

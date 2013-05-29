@@ -17,6 +17,11 @@ ENT.Weight			= 8750
 ENT.EngineForce		= 55
 ENT.rotorPos 	= Vector(35,-114.38,49.41)
 ENT.Scale = 0.25
+ENT.Offsets={
+	hud=Vector(-12,-4,-23),
+	wepselect=Vector(-12,-5,-12.75),
+	view=Vector(-1,-2,-20)
+}
 
 ENT.OtherRotorPos={
 	Vector(35,-57.25,47),
@@ -65,7 +70,7 @@ ENT.Wheels={
 
 ENT.Seats = {
 	{
-		pos=Vector(106.43,5.3,33),
+		pos=Vector(105,7,27),
 		exit=Vector(103.47,61.72,5),
 	},
 	{
